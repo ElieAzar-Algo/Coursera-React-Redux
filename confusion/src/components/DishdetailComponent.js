@@ -3,21 +3,20 @@ import { Card, CardImg, CardImgOverlay, CardText, CardBody,
     CardTitle } from 'reactstrap';
 
 
-    class DishDetail extends Component{
-        constructor(props){
-           super(props);
-        }
+   
 
-        renderComments(comments){
+      function  RenderComments({comments}){
             if (comments != null)
                 return(
                     <div>
                     <h4>Comments</h4>
-                    {comments.map((comment)=> {
+                    {comments.map((com)=> {
                         return(
-                            <div className="list-unstyled">
-                                <p>{comment.comment}</p>
-                                <p>-- {comment.author},{comment.date}</p>
+                            <div key={com.id}>
+                            <div  className="list-unstyled">
+                                <p>{com.comment}</p>
+                                <p>-- {com.author},{com.date}</p>
+                            </div>
                             </div>
                         )
                     })}
@@ -32,7 +31,7 @@ import { Card, CardImg, CardImgOverlay, CardText, CardBody,
         }
 
 
-        renderDish(dish) {
+        function RenderDish({dish}) {
             if (dish != null)
                 return(
                     <Card>
@@ -49,26 +48,32 @@ import { Card, CardImg, CardImgOverlay, CardText, CardBody,
                 );
         }
     
+      const DishDetail =(props)=>{
 
-        render(){
-            const oneDish=this.props.dish;
-            const commentsList=this.props.comments;
-            console.log(commentsList);
+
+        
+            let comments
+            const oneDish=props.dish
+           if (oneDish!==undefined){
+              comments=oneDish.comments
+               console.log(comments)
+               }
+
           return (
                 
                <div className="row">
 
                   <div className="col-12 col-md-5 m-1">
-                    {this.renderDish(oneDish)}
+                   < RenderDish dish={oneDish} />
                   </div>
 
                   <div className="col-12 col-md-5 m-1">
                       
-                      {this.renderComments(commentsList)}
+                      <RenderComments comments={comments}/>
                   </div>
 
                </div>
             )
         }
-    }
+    
     export default DishDetail;
