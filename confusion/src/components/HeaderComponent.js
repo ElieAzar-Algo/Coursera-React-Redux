@@ -18,11 +18,11 @@ class Header extends Component {
             isModalOpen: false
         };
       }
-      toggleModal() {
-        this.setState({
-          isModalOpen: !this.state.isModalOpen
-        });
-      }
+        toggleModal() {
+            this.setState({
+            isModalOpen: !this.state.isModalOpen
+            });
+        }
 
       toggleNav() {
         this.setState({
